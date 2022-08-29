@@ -14,7 +14,7 @@ public class Main {
         System.out.println(numeros.size());
         Collections.sort(numeros);
         System.out.println(numeros);
-        //numeros.add(0,55);
+        //numeros.add(0,55); -> Para comprobar la validación de que está ordenado xd
         if (resultadoOrdenado(numeros)){ //Si el ArrayList está ordenado
             numerosPerdidos = calcNumPer(numeros);
             if (!numerosPerdidos.isEmpty()){//Si el retorno de los números perdidos está vacío
