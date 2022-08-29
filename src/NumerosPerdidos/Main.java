@@ -8,16 +8,16 @@ public class Main {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        ArrayList<Integer> numeros, numerosPerdidos = new ArrayList<>();
-        int num, cantNumLista = ingresarCantNumLista();
+        ArrayList<Integer> numeros, numerosPerdidos;
+        int cantNumLista = ingresarCantNumLista();
         numeros = ingresarNumLista(cantNumLista);
         System.out.println(numeros.size());
         Collections.sort(numeros);
         System.out.println(numeros);
         //numeros.add(0,55);
-        if (resultadoOrdenado(numeros)){
+        if (resultadoOrdenado(numeros)){ //Si el ArrayList está ordenado
             numerosPerdidos = calcNumPer(numeros);
-            if (!numerosPerdidos.isEmpty()){
+            if (!numerosPerdidos.isEmpty()){//Si el retorno de los números perdidos está vacío
                 System.out.println("Los números perdidos del ArrayList " + numeros +
                         " son:\n" +
                         numerosPerdidos);
@@ -30,7 +30,7 @@ public class Main {
         scanner.next();
     }
 
-    //Funciones para ingresar un ArrayList
+    //Funciones para ingresar un ArrayList y sus datos
 
     private static int ingresarCantNumLista() {
         int cantNum;
@@ -44,13 +44,13 @@ public class Main {
     }
 
     private static ArrayList<Integer> ingresarNumLista(int cant) {
-        ArrayList<Integer> lista = new ArrayList<Integer>();
+        ArrayList<Integer> lista = new ArrayList<>();
         int numIngresar;
         System.out.println("Ingrese números enteros (No repetidos).");
         for (int i = 0; i < cant; i++) {
             System.out.printf("%d: " ,(i + 1));
             numIngresar = scanner.nextInt();
-            if (!lista.contains(numIngresar)){
+            if (!lista.contains(numIngresar)){//Para no ingresar valores repetidos
                 lista.add(numIngresar);
             }
             else{
@@ -64,6 +64,7 @@ public class Main {
     //Funciones para saber sí el ArrayList está ordenado o no
 
     private static boolean resultadoOrdenado(ArrayList<Integer> listaOrdenada) {
+        //Mensajes de si el ArrayList está ordenado
         if(ordenado(listaOrdenada)){
             System.out.println("Lista correctamente ordenada");
             return true;
@@ -75,6 +76,7 @@ public class Main {
     }
 
     private static boolean ordenado(ArrayList<Integer> listaOrdenada) {
+        //Verificar si el ArrayList está ordenado
         for (int i = 0; i < listaOrdenada.size() - 1; i++) {
             if (listaOrdenada.get(i) > listaOrdenada.get(i + 1)){
                 return false;
