@@ -2,20 +2,35 @@ package NumerosPerdidos;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        ArrayList<Integer> numeros = new ArrayList<Integer>();
+        ArrayList<Integer> numeros, numerosPerdidos = new ArrayList<>();
         int num, cantNumLista = ingresarCantNumLista();
         numeros = ingresarNumLista(cantNumLista);
-        System.out.println(numeros);
+        System.out.println(numeros.size());
         Collections.sort(numeros);
         System.out.println(numeros);
+        //numeros.add(0,55);
+        if (resultadoOrdenado(numeros)){
+            numerosPerdidos = calcNumPer(numeros);
+            if (!numerosPerdidos.isEmpty()){
+                System.out.println("Los números perdidos del ArrayList " + numeros +
+                        " son:\n" +
+                        numerosPerdidos);
+            }
+            else {
+                System.out.println("No hay números perdidos en el ArrayList "+ numeros);
+            }
+        }
+        System.out.print("Pulse una tecla y enter para salir del programa: ");
+        scanner.next();
     }
+
+    //Funciones para ingresar un ArrayList
 
     private static int ingresarCantNumLista() {
         int cantNum;
@@ -44,5 +59,40 @@ public class Main {
             }
         }
         return lista;
+    }
+
+    //Funciones para saber sí el ArrayList está ordenado o no
+
+    private static boolean resultadoOrdenado(ArrayList<Integer> listaOrdenada) {
+        if(ordenado(listaOrdenada)){
+            System.out.println("Lista correctamente ordenada");
+            return true;
+        }
+        else {
+            System.out.println("Lista no ordenada");
+        }
+        return false;
+    }
+
+    private static boolean ordenado(ArrayList<Integer> listaOrdenada) {
+        for (int i = 0; i < listaOrdenada.size() - 1; i++) {
+            if (listaOrdenada.get(i) > listaOrdenada.get(i + 1)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /*Función para calcular y retornar todos los que faltan entre
+    el mayor y el menor de la lista o array de números.*/
+
+    private static ArrayList<Integer> calcNumPer(ArrayList<Integer> listaNum){
+        ArrayList<Integer> perdidos = new ArrayList<>();
+        for (int i = listaNum.get(0) + 1; i < listaNum.get(listaNum.size() - 1); i++) {
+            if (!listaNum.contains(i)){
+                perdidos.add(i);
+            }
+        }
+        return perdidos;
     }
 }
